@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from './product';
 
 @Component({
   selector: 'app-product-list',
@@ -6,10 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  
-pageTitle: string = "Joe's Products";
 
-products: any[] = [
+pageTitle: string = "Joe's Products";
+imageWidth : number = 50;
+imageMargin : number = 2;
+showImage : boolean = false;
+
+_listFilter: string;
+get listFilter(): string {
+    return this._listFilter;
+}
+set listFilter (value: string) {
+this._listFilter = value;
+this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+
+}
+
+filteredProducts: IProduct[];
+products: IProduct[] = [
 
   
     {
@@ -63,5 +78,25 @@ products: any[] = [
         "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
     }
 ];
+
+constructor(){
+
+this.filteredProducts = this.products;
+
+}
+
+performFilter(filterBy: string): IProduct[] {
+    filterBy =filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) =>
+    product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+}
+
+
+toggleImage(): void {
+
+this.showImage = !this.showImage;
+
+}
+
 
 }
