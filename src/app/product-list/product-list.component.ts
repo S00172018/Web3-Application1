@@ -10,7 +10,7 @@ import { IProduct } from './product';
 export class ProductListComponent implements OnInit {
     
 
-pageTitle: string = "Joe's Products";
+pageTitle: string = "Toms's Products";
 imageWidth : number = 50;
 imageMargin : number = 2;
 showImage : boolean = false;
@@ -48,10 +48,15 @@ toggleImage(): void {
 this.showImage = !this.showImage;
 }
 
+deleteProduct(id:string): void {
+    this._productService.deleteProduct(id);
+}
+
 ngOnInit(): void {
     this._productService.getProducts().subscribe(products => {
         this.products = products,
         this.filteredProducts = this.products;
+
     },
     error => this.errorMessage = <any>error);
     

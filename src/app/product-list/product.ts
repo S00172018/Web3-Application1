@@ -7,7 +7,9 @@ export interface IProduct
     description: string;
     price: number;
     starRating: number;
+    imageStr: string;
     imageUrl: string;
+    
 
 
 }
