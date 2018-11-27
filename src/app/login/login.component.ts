@@ -22,6 +22,20 @@ form;
   ngOnInit() {
   }
 
+   tryFacebookLogin(){
+     this.auth.doFacebookLogin()
+     .then(res => {
+       this.myRoute.navigate(['product-list']);
+     })
+   }
+
+   tryGoogleLogin(){
+     this.auth.doGoogleLogin()
+     .then(res => {
+       this.myRoute.navigate(['product-list']);
+     })
+  }
+
   login(){
     this.auth.doLogin(this.form.value)
     .then(res => {
